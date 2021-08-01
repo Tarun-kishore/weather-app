@@ -6,6 +6,7 @@ const finalOutput = document.querySelector('#data')
 
 weatherForm.addEventListener('submit',(e)=>{
     e.preventDefault()
+    finalOutput.innerHTML ='<div class="loader"></div>'
     fetch(`/weather?address=${search.value}`).then((response)=>{
         response.json().then((data)=>{
             if(data.error){
@@ -37,14 +38,15 @@ weatherForm.addEventListener('submit',(e)=>{
                 humid.textContent='humidity :'+data.humidity
 
                 const feelslike = document.createElement('p')
-                feelslike.textContent='feels like : '+data.feelsLike
+                feelslike.textContent='feels like : '+data.feelsLike +'°C'
                 
                 const temp = document.createElement('p')
-                temp.textContent='temperature : '+data.temp
+                temp.textContent='temperature : '+data.temp+'°C'
 
                 const icon = document.createElement('img')
                 icon.setAttribute('src',data.icon)
                 icon.setAttribute('id','icon')
+                icon.setAttribute('alt',data.condition)
 
                 figures.appendChild(humid)
                 figures.appendChild(temp)
